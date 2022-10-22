@@ -1,0 +1,11 @@
+MANIFEST.in
+setup.py
+src/custom/__init__.py
+src/custom/ruleL001.py
+src/custom/rules.py
+src/sqlfluff_plugin_custom.egg-info/PKG-INFO
+src/sqlfluff_plugin_custom.egg-info/SOURCES.txt
+src/sqlfluff_plugin_custom.egg-info/dependency_links.txt
+src/sqlfluff_plugin_custom.egg-info/entry_points.txt
+src/sqlfluff_plugin_custom.egg-info/requires.txt
+src/sqlfluff_plugin_custom.egg-info/top_level.txt

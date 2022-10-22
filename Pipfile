@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+appdirs = "*"
+"backports.cached-property" = "*"
+chardet = "*"
+click = "*"
+colorama = ">=0.3"
+diff-cover = ">=2.5.0"
+importlib-metadata = ">=1.0.0"
+jinja2 = "*"
+pathspec = "*"
+pytest = "*"
+pyyaml = ">=5.1"
+regex = "*"
+tblib = "*"
+toml = "*"
+tqdm = "*"
+typing-extensions = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
