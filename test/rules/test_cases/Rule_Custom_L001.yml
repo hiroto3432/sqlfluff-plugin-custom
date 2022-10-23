@@ -1,18 +1,18 @@
 rule: Custom_L001
 
-unset_default_and_not_nullable:
+unset_default_and_has_not-null_constraint:
   fail_str: |
     alter table tbl
     add column col1 TEXT
     not null
 
-set_default_and_not_nullable:
+set_default_and_has_not-null_constraint:
   pass_str: |
     alter table tbl
     add column col1 TEXT default ''
     not null
 
-set_default_null_and_not_nullable:
+set_default_null_and_has_not-null_constrainte:
   fail_str: |
     alter table tbl
     add column col1 TEXT default null
@@ -23,14 +23,14 @@ unest_default_and_nullable:
     alter table tbl
     add column col1 TEXT NULL
 
-multiple_columns_including_unest_default_and_not_nullable:
+multiple_columns_including_unest_default_and_has_not-null_constraint:
   fail_str: |
     alter table tbl
     add column col1 TEXT not null,
     add column col2 TEXT default '' not null,
     add column col3 TEXT not null
 
-create_table_including_columns_of_unest_default_and_not_nullable:
+create_table_including_columns_of_unest_default_and_has_not-null_constraint:
   pass_str: |
     create table tbl (
     col1 TEXT not null,

@@ -52,16 +52,16 @@ class Rule_Custom_L001(BaseRule):
                 for segment in stack.segments:
                     if segment.is_type("column_constraint_segment"):
                         phrases = segment.raw.lower().split()
-                        if not self.is_nullable(phrases) and not self.has_default_value(phrases):
+                        if self.has_notnull_constraint(phrases) and not self.has_default_value_other_than_null(phrases):
                             return LintResult(
                                 anchor=segment,
                                 description="Set a non-null default value for columns with a NOT NULL constraint."
                             )
 
     @staticmethod
-    def is_nullable(phrases: List[str]) -> bool:
-        return not ('not' in phrases and phrases[phrases.index('not') + 1] == 'null')
+    def has_notnull_constraint(phrases: List[str]) -> bool:
+        return 'not' in phrases and phrases[phrases.index('not') + 1] == 'null'
 
     @staticmethod
-    def has_default_value(phrases: List[str]) -> bool:
+    def has_default_value_other_than_null(phrases: List[str]) -> bool:
         return 'default' in phrases and phrases[phrases.index('default') + 1] != 'null'
