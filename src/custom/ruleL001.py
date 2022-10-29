@@ -48,15 +48,20 @@ class Rule_Custom_L001(BaseRule):
 
     def _eval(self, context: RuleContext):
         for stack in context.parent_stack:
-            if stack.is_type("alter_table_action_segment"):
-                for segment in stack.segments:
-                    if segment.is_type("column_constraint_segment"):
-                        phrases = segment.raw.lower().split()
-                        if self.has_notnull_constraint(phrases) and not self.has_default_value_other_than_null(phrases):
-                            return LintResult(
-                                anchor=segment,
-                                description="Set a non-null default value for columns with a NOT NULL constraint."
-                            )
+            if stack.is_type('alter_table_action_segment'):
+                phrases = stack.raw.lower().split()
+                if not self.is_sql_for_adding_columns(phrases):
+                    continue
+
+                if self.has_notnull_constraint(phrases) and not self.has_default_value_other_than_null(phrases):
+                    return LintResult(
+                        anchor=stack,
+                        description="Set a non-null default value for columns with a NOT NULL constraint."
+                    )
+
+    @staticmethod
+    def is_sql_for_adding_columns(phrases: List[str]) -> bool:
+        return phrases[0] == 'add'
 
     @staticmethod
     def has_notnull_constraint(phrases: List[str]) -> bool:
